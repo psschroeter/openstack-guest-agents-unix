@@ -103,8 +103,10 @@ def configure_network(hostname, interfaces):
     status = os.waitpid(p.pid, 0)[1]
     logging.debug('status = %d' % status)
 
-    if status != 0:
-        return (500, "Couldn't restart network routing: %d" % status)
+    # Skip this check, routing restart returns an exit status of 1 even though
+    # it completes successfully.
+    # if status != 0:
+    #     return (500, "Couldn't restart network routing: %d" % status)
 
     return (0, "")
 
